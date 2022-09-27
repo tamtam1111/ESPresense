@@ -38,7 +38,9 @@
 #include "DHT.h"
 #include "HX711.h"
 #include "SHT30.h"
+#include "SHT2XSensor.h"
 #include "SensirionSGP30.h"
+#include "SensirionSGP40.h"
 #include "TSL2561.h"
 #endif
 

@@ -48,8 +48,10 @@ bool sendTelemetry(unsigned int totalSeen, unsigned int totalFpSeen, int unsigne
             && BMP180::SendDiscovery()
             && BMP280::SendDiscovery()
             && SHT30::SendDiscovery()
+            && SHT2XSensor::SendDiscovery()
             && TSL2561::SendDiscovery()
             && SensirionSGP30::SendDiscovery()
+            && SensirionSGP40::SendDiscovery()
             && HX711::SendDiscovery()
 #endif
         ) {
@@ -179,8 +181,10 @@ void setupNetwork() {
     BMP180::ConnectToWifi();
     BMP280::ConnectToWifi();
     SHT30::ConnectToWifi();
+    SHT2XSensor::ConnectToWifi();
     TSL2561::ConnectToWifi();
     SensirionSGP30::ConnectToWifi();
+    SensirionSGP40::ConnectToWifi();
     HX711::ConnectToWifi();
 
 #endif
@@ -239,8 +243,10 @@ void setupNetwork() {
     BMP180::SerialReport();
     BMP280::SerialReport();
     SHT30::SerialReport();
+    SHT2XSensor::SerialReport();
     TSL2561::SerialReport();
     SensirionSGP30::SerialReport();
+    SensirionSGP40::SerialReport();
     HX711::SerialReport();
 
 #endif
@@ -508,8 +514,10 @@ void setup() {
     BMP180::Setup();
     BMP280::Setup();
     SHT30::Setup();
+    SHT2XSensor::Setup();
     TSL2561::Setup();
     SensirionSGP30::Setup();
+    SensirionSGP40::Setup();
     HX711::Setup();
 #endif
     xTaskCreatePinnedToCore(scanTask, "scanTask", SCAN_TASK_STACK_SIZE, nullptr, 1, &scanTaskHandle, CONFIG_BT_NIMBLE_PINNED_TO_CORE);
@@ -538,8 +546,10 @@ void loop() {
     BMP180::Loop();
     BMP280::Loop();
     SHT30::Loop();
+    SHT2XSensor::Loop();
     TSL2561::Loop();
     SensirionSGP30::Loop();
+    SensirionSGP40::Loop(SHT2XSensor::getTemperature(), SHT2XSensor::getHumidity());
     HX711::Loop();
 #endif
 }
